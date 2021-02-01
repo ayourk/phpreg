@@ -1,0 +1,114 @@
+-- MySQL dump 10.17  Distrib 10.3.25-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: phpreg
+-- ------------------------------------------------------
+-- Server version	10.3.25-MariaDB-0ubuntu0.20.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `iplog`
+--
+
+DROP TABLE IF EXISTS `iplog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `iplog` (
+  `ip_id` bigint(100) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` bigint(20) unsigned NOT NULL DEFAULT 0,
+  `acctname` varchar(255) NOT NULL DEFAULT '',
+  `ip` varchar(128) NOT NULL DEFAULT '0.0.0.0',
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `email` varchar(320) NOT NULL DEFAULT '',
+  PRIMARY KEY (`ip_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `location`
+--
+
+DROP TABLE IF EXISTS `location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `location` (
+  `location_id` bigint(20) unsigned NOT NULL,
+  `zipcode` varchar(100) NOT NULL DEFAULT '0',
+  `city` varchar(100) NOT NULL DEFAULT '0',
+  `county` varchar(512) NOT NULL DEFAULT '',
+  `state` varchar(256) NOT NULL DEFAULT '',
+  `country` varchar(100) NOT NULL DEFAULT 'USA',
+  `planet` varchar(100) NOT NULL DEFAULT 'Earth',
+  `galaxy` varchar(100) NOT NULL DEFAULT 'Milky Way',
+  PRIMARY KEY (`location_id`),
+  UNIQUE KEY `location_UN` (`zipcode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `user_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL DEFAULT '',
+  `real_name` varchar(100) NOT NULL DEFAULT '',
+  `email` varchar(320) NOT NULL DEFAULT '',
+  `password` varchar(512) NOT NULL DEFAULT '',
+  `location_id` bigint(20) unsigned NOT NULL DEFAULT 0,
+  `last_ip` varchar(128) NOT NULL DEFAULT '0.0.0.0',
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `access_level` int(11) NOT NULL DEFAULT 1,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `sec_pin` varchar(4) NOT NULL DEFAULT '0',
+  `sec_question` varchar(100) NOT NULL DEFAULT '',
+  `sec_answer` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `userverify`
+--
+
+DROP TABLE IF EXISTS `userverify`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `userverify` (
+  `verifyid` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` varchar(100) NOT NULL DEFAULT '',
+  `userid` bigint(20) unsigned NOT NULL DEFAULT 0,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `expires` timestamp NOT NULL DEFAULT (current_timestamp() + interval 5 day),
+  `username` varchar(255) NOT NULL DEFAULT '',
+  `password` varchar(512) NOT NULL DEFAULT '',
+  `email` varchar(320) NOT NULL DEFAULT '',
+  `ip` varchar(128) NOT NULL DEFAULT '0.0.0.0',
+  `banned` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `verified` int(10) unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`verifyid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed
