@@ -33,6 +33,6 @@ lib/util_inc.php - Various PHP utility functions used throughout the project.  C
 
 templates/* - Various HTML layouts for the different forms and pages displayed to the user.  Customize to your needs.
 
-templates_c/ - Temporary file directory used to store compiled Smarty pages.  NEEDS TO BE WRITABLE by web server user.
+templates_c/ - Temporary file directory used to store compiled Smarty pages.  NEEDS TO BE WRITABLE by the web server user.
 
 validate.php - Main web page where account creation happens.  Email links should point to this.
